@@ -1,7 +1,7 @@
 import CardPokemon from "./components/Card/index.js";
 
 function App() {
-  return <CardPokemon name="abobrinha" />;
+  return <CardPokemon name="abobrinha" image="a" />;
 }
 
 export default App;
