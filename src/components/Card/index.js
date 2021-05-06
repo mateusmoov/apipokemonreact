@@ -1,15 +1,15 @@
-import ImagePalette from "react-image-palette";
+import { Palette } from "react-palette";
 import * as S from "./styles.js";
 
-const CardPokemon = ({ name, image }) => {
+const CardPokemon = ({ image, name }) => {
   return (
-    <ImagePalette image={image}>
-      {({ alternativeColor }) => (
-        <S.Card inputColor={alternativeColor}>
+    <Palette src={image}>
+      {({ data }) => (
+        <S.Card inputColor={data.lightMuted}>
           <S.PokemonName>{name}</S.PokemonName>
         </S.Card>
       )}
-    </ImagePalette>
+    </Palette>
   );
 };
 
