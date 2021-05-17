@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const ContainerCard = styled.div`
+  display: inline-flex;
+  align-items: center;
+`;
+
 export const Card = styled.div`
   width: 314px;
   height: 318px;
