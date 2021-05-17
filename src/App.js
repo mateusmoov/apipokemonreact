@@ -6,7 +6,7 @@ function App() {
   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
-    Api.get("1")
+    Api.get(`25`)
       .then((response) => setPokemon(response.data))
       .catch((err) => {
         console.log("Não foi possível fazer a requisição" + err);
@@ -16,13 +16,18 @@ function App() {
   return (
     <div>
       {pokemon.abilities
-        ? pokemon.abilities.map((item, index) => (
-            <CardPokemon
-              key={index}
-              name={item.ability.name}
-              image="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-            />
-          ))
+        ? pokemon.abilities
+            .filter((elem, index) => index < 1)
+            .map((item, index) => {
+              console.log(pokemon.sprites);
+              return (
+                <CardPokemon
+                  key={index}
+                  name={pokemon.name}
+                  image={pokemon.sprites.front_default}
+                />
+              );
+            })
         : "Loading..."}
     </div>
   );

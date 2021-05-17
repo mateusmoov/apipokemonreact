@@ -5,7 +5,7 @@ const CardPokemon = ({ image, name }) => {
   return (
     <Palette src={image}>
       {({ data }) => (
-        <S.Card inputColor={data.darkMuted}>
+        <S.Card inputColor={data.vibrant}>
           <S.PokemonName>{name}</S.PokemonName>
         </S.Card>
       )}
