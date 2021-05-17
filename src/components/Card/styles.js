@@ -13,4 +13,13 @@ export const PokemonName = styled.div`
   color: white;
   font-family: Montserrat;
   font-weight: 700;
+  display: flex;
+  justify-content: center;
+  padding-top: 43px;
+  text-transform: capitalize;
+`;
+
+export const PokemonImage = styled.div`
+  display: flex;
+  justify-content: center;
 `;
