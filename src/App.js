@@ -6,28 +6,30 @@ function App() {
   const [pokemon, setPokemon] = useState([]);
 
   useEffect(() => {
-    Api.get(`25`)
-      .then((response) => setPokemon(response.data))
-      .catch((err) => {
-        console.log("Não foi possível fazer a requisição" + err);
-      });
+    for (let i = 1; i < 20; i++) {
+      Api.get(`${i}`)
+        .then((response) =>
+          setPokemon((oldPokemon) => [...oldPokemon, response.data])
+        )
+        .catch((err) => {
+          console.log("Não foi possível fazer a requisição" + err);
+        });
+    }
   }, []);
 
   return (
     <div>
-      {pokemon.abilities
-        ? pokemon.abilities
-            .filter((elem, index) => index < 1)
-            .map((item, index) => {
-              console.log(pokemon.sprites);
-              return (
-                <CardPokemon
-                  key={index}
-                  name={pokemon.name}
-                  image={pokemon.sprites.front_default}
-                />
-              );
-            })
+      {pokemon.length > 0
+        ? pokemon.map((item, index) => {
+            return (
+              <CardPokemon
+                key={index}
+                name={item.name}
+                sprite={item.sprites.front_default}
+                BackgroundImage={item.sprites.front_default}
+              />
+            );
+          })
         : "Loading..."}
     </div>
   );
