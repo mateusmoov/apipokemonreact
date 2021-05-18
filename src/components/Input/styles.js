@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
+export const SectionInput = styled.div``;
+
 export const ContainerInput = styled.div`
   position: relative;
   width: 773px;
+`;
 
-  .searchIcon {
-    position: absolute;
-    right: 0px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+export const SearchIcon = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 export const Input = styled.input`
