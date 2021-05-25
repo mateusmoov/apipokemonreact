@@ -1,23 +1,32 @@
 import Api from "../../services/api";
 import CardPokemon from "../../components/Card/index";
 import Input from "../../components/Input";
-import Card from "../../components/Card";
 import { useState, useEffect, useContext } from "react";
 import * as S from "./styles.js";
+import { MyContext } from "../../context/PokemonContext";
 
 const Home = () => {
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemonList, setPokemonList] = useState([]);
+
+  const pokemon = useContext(MyContext);
+
   useEffect(() => {
     for (let i = 1; i <= 21; i++) {
       Api.get(`${i}`)
         .then((response) =>
-          setPokemon((oldPokemon) => [...oldPokemon, response.data])
+          setPokemonList((oldPokemon) => [...oldPokemon, response.data])
         )
         .catch((err) => {
           console.log("Não foi possível fazer a requisição" + err);
         });
     }
   }, []);
+
+  const lowerPokemonName = pokemon.pokemonName.toLowerCase();
+
+  const pokemonFiltered = pokemonList.filter((poke) =>
+    poke.name.toLowerCase().includes(lowerPokemonName)
+  );
 
   return (
     <S.ContainerHome>
@@ -28,18 +37,16 @@ const Home = () => {
       </S.AlgumacoisaWrapper>
       <S.ContainerCard>
         <S.Card>
-          {pokemon.length > 0
-            ? pokemon.map((item, index) => {
-                return (
-                  <CardPokemon
-                    key={index}
-                    name={item.name}
-                    sprite={item.sprites.front_default}
-                    BackgroundImage={item.sprites.front_default}
-                  />
-                );
-              })
-            : "Loading..."}
+          {pokemonFiltered.map((item, index) => {
+            return (
+              <CardPokemon
+                key={index}
+                name={item.name}
+                sprite={item.sprites.front_default}
+                BackgroundImage={item.sprites.front_default}
+              />
+            );
+          })}
         </S.Card>
       </S.ContainerCard>
     </S.ContainerHome>
