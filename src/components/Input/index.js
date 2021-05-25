@@ -1,12 +1,11 @@
+import React from "react";
 import * as S from "./styles.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import Api from "../../services/api.js";
 import CardPokemon from "../Card/index";
-
 const Input = () => {
-  const [input, setInput] = useState("");
   const [pokemonName, setPokemonName] = useState("");
   const [pokemon, setPokemon] = useState();
 
@@ -28,7 +27,9 @@ const Input = () => {
               placeholder="Encontre seu pokémon"
               name="pokemonName"
               value={pokemonName}
-              onChange={(e) => setPokemonName(e.target.value)}
+              onChange={(e) => {
+                setPokemonName(e.target.value);
+              }}
             />
             <S.SearchIcon>
               <FontAwesomeIcon icon={faSearch} className="searchIcon" />
@@ -36,7 +37,6 @@ const Input = () => {
           </div>
         </form>
       </S.ContainerInput>
-
       <div>
         {pokemon ? (
           <CardPokemon
