@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from "react";
-import Api from "./services/api.js";
-import CardPokemon from "./components/Card/index";
-import Input from "./components/Input/index";
+import React from "react";
 import { GlobalStyle } from "./reset.js";
 import Home from "./pages/Home/index";
+import { UserProvider } from "./context/PokemonContext";
 
 function App() {
   return (
-    <>
+    <UserProvider>
       <GlobalStyle />
       <Home />
-    </>
+    </UserProvider>
   );
 }
 

@@ -1,23 +1,37 @@
 import Api from "../../services/api";
 import CardPokemon from "../../components/Card/index";
 import Input from "../../components/Input";
-import Card from "../../components/Card";
 import { useState, useEffect, useContext } from "react";
+import { MyContext } from "../../context/PokemonContext";
 import * as S from "./styles.js";
 
 const Home = () => {
-  const [pokemon, setPokemon] = useState([]);
+  // Request Card API
+  const [pokemonList, setPokemonList] = useState([]);
   useEffect(() => {
     for (let i = 1; i <= 21; i++) {
       Api.get(`${i}`)
         .then((response) =>
-          setPokemon((oldPokemon) => [...oldPokemon, response.data])
+          setPokemonList((oldPokemon) => [...oldPokemon, response.data])
         )
         .catch((err) => {
           console.log("Não foi possível fazer a requisição" + err);
         });
     }
   }, []);
+
+  // Request Card Input
+  const pokemon = useContext(MyContext);
+  const [pokemonCard, setPokemonCard] = useState();
+
+  useEffect(() => {
+    pokemon.pokemonName &&
+      Api.get(`${pokemon.pokemonName}`)
+        .then((response) => setPokemonCard(response.data))
+        .catch((err) => {
+          console.log("Não foi possível fazer a requisição" + err);
+        });
+  }, [pokemon.pokemonName]);
 
   return (
     <S.ContainerHome>
@@ -27,20 +41,34 @@ const Home = () => {
         <Input />
       </S.AlgumacoisaWrapper>
       <S.ContainerCard>
-        <S.Card>
-          {pokemon.length > 0
-            ? pokemon.map((item, index) => {
-                return (
-                  <CardPokemon
-                    key={index}
-                    name={item.name}
-                    sprite={item.sprites.front_default}
-                    BackgroundImage={item.sprites.front_default}
-                  />
-                );
-              })
-            : "Loading..."}
-        </S.Card>
+        {!pokemon.pokemonName ? (
+          <S.Card>
+            {pokemonList.length > 0
+              ? pokemonList.map((item, index) => {
+                  return (
+                    <CardPokemon
+                      key={index}
+                      name={item.name}
+                      sprite={item.sprites.front_default}
+                      BackgroundImage={item.sprites.front_default}
+                    />
+                  );
+                })
+              : "Loading..."}
+          </S.Card>
+        ) : (
+          <S.Card>
+            {pokemonCard ? (
+              <CardPokemon
+                name={pokemonCard.name}
+                sprite={pokemonCard.sprites?.front_default}
+                BackgroundImage={pokemonCard.sprites?.front_default}
+              />
+            ) : (
+              console.log("carregando")
+            )}
+          </S.Card>
+        )}
       </S.ContainerCard>
     </S.ContainerHome>
   );
