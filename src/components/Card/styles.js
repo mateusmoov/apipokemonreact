@@ -1,16 +1,12 @@
 import styled from "styled-components";
 
-export const ContainerCard = styled.div`
-  display: inline-flex;
-  align-items: center;
-`;
+export const ContainerCard = styled.div``;
 
 export const Card = styled.div`
   width: 314px;
   height: 318px;
   background-color: ${(props) => props.inputColor};
   border-radius: 15px;
-  margin: 80px;
 `;
 
 export const PokemonName = styled.div`
