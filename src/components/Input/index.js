@@ -10,19 +10,17 @@ const Input = () => {
   return (
     <S.SectionInput>
       <S.ContainerInput>
-        <form action="">
-          <div>
-            <S.Input
-              placeholder="Encontre seu pokémon"
-              name="pokemonName"
-              value={pokemon.pokemonName}
-              onChange={(e) => pokemon.setPokemonName(e.target.value)}
-            />
-            <S.SearchIcon>
-              <FontAwesomeIcon icon={faSearch} className="searchIcon" />
-            </S.SearchIcon>
-          </div>
-        </form>
+        <div>
+          <S.Input
+            placeholder="Encontre seu pokémon"
+            name="pokemonName"
+            value={pokemon.pokemonName}
+            onChange={(e) => pokemon.setPokemonName(e.target.value)}
+          />
+          <S.SearchIcon>
+            <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+          </S.SearchIcon>
+        </div>
       </S.ContainerInput>
     </S.SectionInput>
   );
