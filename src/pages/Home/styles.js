@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ContainerHome = styled.div`
-  height: 100%;
+  height: ${(props) => props.height};
   background-color: #36393f;
 `;
 

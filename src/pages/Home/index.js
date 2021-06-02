@@ -34,7 +34,7 @@ const Home = () => {
   }, [pokemon.pokemonName]);
 
   return (
-    <S.ContainerHome>
+    <S.ContainerHome height={!pokemon.pokemonName ? "100%" : "100vh"}>
       <S.AlgumacoisaWrapper>
         <S.Title>Olá!</S.Title>
         <S.Subtitle>Seja bem vindo a central de Pokemons!</S.Subtitle>
