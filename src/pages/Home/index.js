@@ -3,6 +3,7 @@ import CardPokemon from "../../components/Card/index";
 import Input from "../../components/Input";
 import { useState, useEffect, useContext } from "react";
 import { MyContext } from "../../context/PokemonContext";
+import useDebounce from "../../hooks/debounced.js";
 import * as S from "./styles.js";
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
   // Request Card Input
   const pokemon = useContext(MyContext);
   const [pokemonCard, setPokemonCard] = useState();
+  const inputDebounce = useDebounce(pokemon.pokemonName, 500);
 
   useEffect(() => {
     pokemon.pokemonName &&
@@ -31,7 +33,7 @@ const Home = () => {
         .catch((err) => {
           console.log("Não foi possível fazer a requisição" + err);
         });
-  }, [pokemon.pokemonName]);
+  }, [inputDebounce]);
 
   return (
     <S.ContainerHome height={!pokemon.pokemonName ? "100%" : "100vh"}>
